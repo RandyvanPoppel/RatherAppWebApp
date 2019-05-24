@@ -1,38 +1,25 @@
 <div class="row">
-  <div class="col-md-6 col-lg-4 mb-15px">
+  <div *ngFor="let comparison of comparisons" class="col-md-6 col-lg-4 mb-15px">
     <div class="card text-center">
       <div class="card-body">
         <h5 class="card-title">Would you rather:</h5>
-        <button class="btn-vote btn btn-warning mb-5px">Drive a BMW</button>
-        <input class="input-votes hidden" value="1232">
-        <button class="btn-vote btn btn-warning mb-5px">Drive a Mercedes</button>
-        <input class="input-votes hidden" value="1241">
-        <button class="btn-vote btn btn-warning mb-5px">Drive a VolksWagen</button>
-        <input class="input-votes hidden" value="2214">
-        <button class="btn-vote btn btn-warning">Drive a Fiat</button>
-        <input class="input-votes hidden" value="859">
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 col-lg-4 mb-15px">
-    <div class="card text-center">
-      <div class="card-body">
-        <h5 class="card-title">Would you rather:</h5>
-        <button class="btn-vote btn-voted btn btn-warning mb-5px">Drive a BMW</button>
-        <input class="input-votes form-control" value="1232">
-        <button class="btn-vote btn-voted btn btn-primary mb-5px">Drive a Mercedes</button>
-        <input class="input-votes form-control" value="1241">
-        <button class="btn-vote btn-voted btn btn-warning mb-5px"><i class="fas fa-trophy"></i>Drive a VolksWagen</button>
-        <input class="input-votes form-control" value="2214">
-        <button class="btn-vote btn-voted btn btn-warning mb-15px">Drive a Fiat</button>
-        <input class="input-votes form-control" value="859">
-        <button class="btn-chat btn btn-secondary"><i class="fas fa-comments"></i>Chat</button>
+        <div *ngFor="let choice of comparison.choices">
+          <button class="btn-vote btn-voted btn btn-warning mb-5px">{{choice.description}}</button>
+          <input class="input-votes" disabled value="{{countVotes(comparison.id, choice.id)}}">
+        </div>
+        <!--<button class="btn-vote btn btn-warning mb-5px">Drive a BMW</button>-->
+        <!--<input class="input-votes hidden" value="1232">-->
+        <!--<button class="btn-vote btn btn-warning mb-5px">Drive a Mercedes</button>-->
+        <!--<input class="input-votes hidden" value="1241">-->
+        <!--<button class="btn-vote btn btn-warning mb-5px">Drive a VolksWagen</button>-->
+        <!--<input class="input-votes hidden" value="2214">-->
+        <!--<button class="btn-vote btn btn-warning">Drive a Fiat</button>-->
+        <!--<input class="input-votes hidden" value="859">-->
       </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <button class="btn-chat btn btn-secondary"><i class="fas fa-sync-alt"></i>Load more</button>
+  <button (click)="getLatestComparisons()" class="btn-chat btn btn-secondary"><i class="fas fa-sync-alt"></i>Load more</button>
 </div>

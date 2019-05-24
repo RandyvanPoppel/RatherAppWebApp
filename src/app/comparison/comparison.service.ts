@@ -13,7 +13,7 @@ export class ComparisonService {
   }
 
   getLatestComparisons(unixTimeStamp: string): Observable<any> {
-    if (unixTimeStamp == null) {
+    if (unixTimeStamp == null || typeof unixTimeStamp === 'undefined') {
       unixTimeStamp = String(new Date().getTime());
     }
     return this.httpclient.get(this.apiURL + 'getLatest', {
