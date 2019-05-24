@@ -5,13 +5,25 @@
 }
 
 .bg-custom {
-  background: #2369be;
+  background: #007bff;
 }
 
-.no_padding {
+.no-padding {
   padding: 0 !important;
 }
 
 .content {
   padding: 25px 50px 25px 50px;
+}
+
+.mb-5px {
+  margin-bottom: 5px;
+}
+
+.mb-15px {
+  margin-bottom: 15px;
+}
+
+.hidden {
+  display: none !important;
 }

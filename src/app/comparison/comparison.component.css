@@ -1,0 +1,21 @@
+.btn-vote {
+  width: 100%;
+  float: left;
+}
+
+.btn-voted {
+  width: 70% !important;
+  border-radius: .25rem 0 0 .25rem !important;
+}
+
+.input-votes {
+  width: 30% !important;
+  height: 38px !important;
+  border-radius: 0 .25rem .25rem 0 !important;
+  float: left;
+  text-align: center;
+}
+
+.btn-chat {
+  width: 100%;
+}
