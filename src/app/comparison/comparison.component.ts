@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ComparisonService} from './comparison.service';
 import {Comparison} from '../models/comparison';
+import {Vote} from '../models/vote';
 
 @Component({
   selector: 'app-comparison',
@@ -10,6 +11,7 @@ import {Comparison} from '../models/comparison';
 export class ComparisonComponent implements OnInit {
   private unixTimeStamp: string;
   private comparisons: Comparison[];
+  private vote: Vote;
 
   constructor(private comparisonService: ComparisonService) {
   }
@@ -37,13 +39,36 @@ export class ComparisonComponent implements OnInit {
     let amountOfVotes = 0;
     this.comparisons.forEach(comparison => {
       if (comparison.id === comparisonId) {
-        comparison.votes.forEach(vote => {
-          if (vote.choice.id === choiceId) {
+        comparison.votes.forEach(comparisonVote => {
+          if (comparisonVote.choice.id === choiceId) {
             amountOfVotes++;
           }
         });
       }
     });
     return String(amountOfVotes);
+  }
+
+  voteOnComparison(comparisonId, choiceId) {
+    this.comparisonService.vote(comparisonId, choiceId).subscribe(data => {
+      if (data !== null) {
+        this.comparisons.forEach(comparison => {
+          if (comparison.id === comparisonId) {
+            let voteToRemoveIndex = -1;
+            comparison.votes.forEach((comparisonVote, index) => {
+              // @ts-ignore
+              this.vote = data;
+              if (this.vote.user.id === comparisonVote.user.id) {
+                voteToRemoveIndex = index;
+              }
+            });
+            if (voteToRemoveIndex !== -1) {
+              comparison.votes.splice(voteToRemoveIndex, 1);
+            }
+            comparison.votes.push(this.vote);
+          }
+        });
+      }
+    });
   }
 }

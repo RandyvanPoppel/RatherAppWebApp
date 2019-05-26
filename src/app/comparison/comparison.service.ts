@@ -20,4 +20,10 @@ export class ComparisonService {
       params: new HttpParams().set('unixTimeStamp', unixTimeStamp)
     });
   }
+
+  vote(comparisonId, choiceId) {
+    const params = '?comparisonId=' + comparisonId + '&choiceId=' + choiceId;
+    return this.httpclient.post(this.apiURL + 'vote' + params, null
+    );
+  }
 }
