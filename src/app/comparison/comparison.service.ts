@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Choice} from '../models/choice';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,20 @@ export class ComparisonService {
   vote(comparisonId, choiceId) {
     const params = '?comparisonId=' + comparisonId + '&choiceId=' + choiceId;
     return this.httpclient.post(this.apiURL + 'vote' + params, null
+    );
+  }
+
+  createComparison(choicesInMemory: Choice[]) {
+    let params = '';
+    choicesInMemory.forEach((choice, index) => {
+      if (index === 0) {
+        params = '?';
+      } else {
+        params += '&';
+      }
+      params += 'choiceDescriptions=' + choice.description;
+    })
+    return this.httpclient.post(this.apiURL + 'add' + params, null
     );
   }
 }

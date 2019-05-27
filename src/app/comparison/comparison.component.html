@@ -1,10 +1,36 @@
 <div class="row">
+  <div class="col-12 mb-15px">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Create Comparison</h5>
+        <div class="row">
+          <div class="col-6 mb-15px">
+            <input [(ngModel)]="choiceValue" class="form-control input-choice">
+            <button (click)="addChoice()" class="btn btn-success btn-add-choice"><i class="fas fa-plus"></i></button>
+          </div>
+          <div class="col-6 mb-15px">
+            <div *ngIf="choicesInMemory.length > 0" class="choice-list">
+              <div *ngFor="let choiceInMemory of choicesInMemory" class="choice-item">
+                {{choiceInMemory.description}}
+                <i (click)="removeChoice(choiceInMemory.description)" class="fas fa-times"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button *ngIf="choicesInMemory.length >= 2" (click)="createComparison()" class="btn-chat btn btn-success"><i class="fas fa-plus"></i>Create Comparison
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div *ngFor="let comparison of comparisons" class="col-md-6 col-lg-4 mb-15px">
     <div class="card text-center">
       <div class="card-body">
         <h5 class="card-title">Would you rather:</h5>
         <div *ngFor="let choice of comparison.choices">
-          <button (click)="voteOnComparison(comparison.id, choice.id)" class="btn-vote btn-voted btn btn-warning mb-5px">{{choice.description}}</button>
+          <button (click)="voteOnComparison(comparison.id, choice.id)"
+                  class="btn-vote btn-voted btn btn-warning mb-5px">{{choice.description}}</button>
           <input class="input-votes" disabled value="{{countVotes(comparison.id, choice.id)}}">
         </div>
         <!--<button class="btn-voteOnComparison btn btn-warning mb-5px">Drive a BMW</button>-->
@@ -21,5 +47,6 @@
 </div>
 
 <div class="row">
-  <button (click)="getLatestComparisons()" class="btn-chat btn btn-secondary"><i class="fas fa-sync-alt"></i>Load more</button>
+  <button (click)="getLatestComparisons()" class="btn-chat btn btn-secondary"><i class="fas fa-sync-alt"></i>Load more
+  </button>
 </div>

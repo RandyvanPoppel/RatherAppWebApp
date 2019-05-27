@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ComparisonService} from './comparison.service';
 import {Comparison} from '../models/comparison';
 import {Vote} from '../models/vote';
+import {Choice} from '../models/choice';
 
 @Component({
   selector: 'app-comparison',
@@ -12,6 +13,8 @@ export class ComparisonComponent implements OnInit {
   private unixTimeStamp: string;
   private comparisons: Comparison[];
   private vote: Vote;
+  private choicesInMemory: Choice[] = [];
+  private choiceValue = '';
 
   constructor(private comparisonService: ComparisonService) {
   }
@@ -69,6 +72,31 @@ export class ComparisonComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  addChoice() {
+    this.choicesInMemory.push(new Choice('', this.choiceValue));
+    this.choiceValue = '';
+  }
+
+  removeChoice(choiceDescription: string) {
+    let choiceToDeleteIndex = -1;
+    this.choicesInMemory.forEach((choice, index) => {
+      if (choice.description === choiceDescription) {
+        choiceToDeleteIndex = index;
+      }
+    });
+    if (choiceToDeleteIndex !== -1) {
+      this.choicesInMemory.splice(choiceToDeleteIndex, 1);
+    }
+  }
+
+  createComparison() {
+    this.comparisonService.createComparison(this.choicesInMemory).subscribe(data => {
+      this.comparisons.splice(0, 0, data as Comparison);
+      this.choiceValue = '';
+      this.choicesInMemory = [];
     });
   }
 }
