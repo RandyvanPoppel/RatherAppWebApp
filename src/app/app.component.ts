@@ -15,7 +15,6 @@ export class AppComponent {
   title = 'RatherAppWebApp';
 
   currentUser: AuthUser;
-  userFromApi: AuthUser;
 
   constructor(
     private userService: UserService,
@@ -23,12 +22,6 @@ export class AppComponent {
     private router: Router,
   ) {
     this.currentUser = this.authenticationService.currentUserValue;
-  }
-
-  ngOnInit() {
-    this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
-      this.userFromApi = user;
-    });
   }
 
   logOut() {
