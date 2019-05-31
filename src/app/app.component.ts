@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthUser} from './models/authentication/authuser';
 import {AuthenticationService} from './authentication/authentication.service';
-import {first} from 'rxjs/operators';
 import {UserService} from './authentication/user.service';
 import {Router} from '@angular/router';
 
