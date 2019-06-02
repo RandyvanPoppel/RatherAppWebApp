@@ -57,7 +57,7 @@ export class ComparisonComponent implements OnInit {
       if (data !== null) {
         this.comparisons.forEach(comparison => {
           if (comparison.id === comparisonId) {
-            let voteToRemoveIndex = -1;
+            let voteToRemoveIndex;
             comparison.votes.forEach((comparisonVote, index) => {
               // @ts-ignore
               this.vote = data;
@@ -65,7 +65,7 @@ export class ComparisonComponent implements OnInit {
                 voteToRemoveIndex = index;
               }
             });
-            if (voteToRemoveIndex !== -1) {
+            if (typeof voteToRemoveIndex !== 'undefined') {
               comparison.votes.splice(voteToRemoveIndex, 1);
             }
             comparison.votes.push(this.vote);
