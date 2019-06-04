@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-8 mb-15px">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Chat</h5>
+        <div *ngIf="chatMessages.length > 0" class="message-list">
+          <div *ngFor="let chatMessage of chatMessages" class="message-item">
+            {{chatMessage}}
+          </div>
+        </div>
+        <input [(ngModel)]="messageValue" class="input-message form-control" type="text">
+        <button (click)="sendMessage()" class="btn-add-message btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

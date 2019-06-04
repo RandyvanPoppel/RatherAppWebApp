@@ -10,6 +10,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import { LoginComponent } from './login/login.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     ComparisonComponent,
     RegistrationComponent,
     LoginComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,
