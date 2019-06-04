@@ -32,3 +32,11 @@
 .card {
   width: 100%;
 }
+
+.nav-links {
+  margin-left: 10px;
+}
+
+.nav-links a, .nav-links a:hover {
+  color: white;
+}
